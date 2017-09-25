@@ -1,5 +1,7 @@
+require 'pry'
 class Game
-  attr_reader :name, :difficulty, :secret_number, :range
+  attr_accessor :tries
+  attr_reader   :name, :difficulty, :tries, :secret_number, :range, :points
 
   def initialize(name, difficulty)
     @name       = name
@@ -10,7 +12,8 @@ class Game
   end
 
   def generate_secret_number
-    @secret_number = rand(self.range)
+    # @secret_number = rand(self.range)
+    @secret_number = 12
   end
 
   def won?(number)
@@ -19,5 +22,9 @@ class Game
 
   def larger?(number)
     number > @secret_number
+  end
+
+  def loose_points(number)
+    @points -= (number - @secret_number).abs / 2
   end
 end
